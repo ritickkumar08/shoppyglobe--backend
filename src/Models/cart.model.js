@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 const cartSchema = new mongoose.Schema({
         userId:{
             type: mongoose.Schema.Types.ObjectId,
@@ -23,3 +22,5 @@ const cartSchema = new mongoose.Schema({
     },
     { timestamps: true }
 )
+// Create and export the Cart model to collection based on the defined schema
+export default mongoose.model('cart', cartSchema)
