@@ -1,18 +1,13 @@
 import mongoose from "mongoose";
 
-const Dbconnet = async () => {
+const dbconnet = async () => {
     try{
-        if(!process.env.MONGO_URI){
-            throw new Error('MONGO_URI is not found') 
-        }
-
-        mongoose.connect(process.env.MONGO_URI)
-        .then(()=> console.log(`mongodb connected`))
-        .catch(() => console.log('connection failed'))
+        await mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.m75zulj.mongodb.net/`);
+        console.log("MongoDB connected successfully");
     }catch (err){
         console.error(`MongoDB connection failed: ${err.message}`);
         process.exit(1);
     }
 }
 
-export default Dbconnet;
+export default dbconnet;
