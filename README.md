@@ -21,6 +21,8 @@ steps:
 got error -> MongoDB connection failed: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/   
  resolved as by adding IP address 0.0.0.0/0 - which accessible from everywhere.
 
--> 
+======================================================================================================
+after defining the models and schemas now, we will move to the logics the controllers :
+    ->firstly we aare going to setup logics for our cart.
         
     
