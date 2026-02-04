@@ -13,4 +13,11 @@ app.use(express.json()) //a built-in middleware to convert the responses to json
 app.use('/products', productRoutes)
 app.use('/cart',cartRoutes)
 
+/* -------------------- Global Error Handler -------------------- */
+//This middleware handles errors. that are not because of the users but something broke internally
+app.use((err,req,res,next)=>{
+    console.error(err.stack);
+    res.status(500).json({ error: "Internal Server Error" });
+})
+
 export default app
