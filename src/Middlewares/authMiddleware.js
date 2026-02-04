@@ -7,16 +7,16 @@ const authMiddleware = (req, res, next) =>{
     const authHeader = req.headers.authorization
 
     // If there is no Authorization header OR
-    // if it does not start with "JWT "
+    // if it does not start with "Bearer "
     // then the client is not authenticated
-    if(!authHeader || !authHeader.startsWith('JWT')){
+    if(!authHeader || !authHeader.startsWith('Bearer ')){
         // 401 = Unauthorized
         return res.status(401).json({message: 'token not provided'})
     }
 
-    // Split the header by space: "JWT <token>"
-    // index 0 = "JWT"
-    // index 1 = the actual JWT
+    // Split the header by space: "Bearer <token>"
+    // index 0 = "Bearer"
+    // index 1 = the actual Bearer
     const token = authHeader.split(" ")[1]
 
     try{
@@ -25,15 +25,12 @@ const authMiddleware = (req, res, next) =>{
         // 1. Checks token signature 
         // 2. Checks token expiration
         // 3. Decodes the payload
-        const decoded = jwt.verfiy(token, process.env.JWT_SECRET)
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
         // Attach useful data from the token to the request object
         // This makes the user data available to ALL protected routes
         // Example: req.user.id inside controllers
-        req.user = {
-            id: decoded.id,       // user ID stored when token was created
-            role: decoded.email,  
-        };
+        req.user = { id: decoded.id }
 
         //pass the control to the next middleware
         next();

@@ -22,7 +22,7 @@ export const addToCart = async(req,res) =>{
         }
 
         //now it can happen that the user has already added the product before hand checking for that
-        const IteminCart = await Cart.findById({userId, productId})
+        let IteminCart = await Cart.findOne({userId, productId})
 
         if(IteminCart){
             IteminCart.quantity += quantity
@@ -37,6 +37,8 @@ export const addToCart = async(req,res) =>{
 
         res.status(200).json({ IteminCart, message :'added to cart'})
     }catch(err){
+        console.log(err);
+        
         res.status(500).json({message: 'failed to add the product'})
     }
 }
@@ -54,7 +56,7 @@ export const updateCart = async (req, res) => {
         }
 
         //finding the cart item and updating it 
-        const IteminCart = await Cart.findOneAndUpdate(
+        const IteminCart = await Cart.findOneAndDelete(
             {userId, productId}, //as we need matching bot the product and the user
             {quantity},
             {new: true} //

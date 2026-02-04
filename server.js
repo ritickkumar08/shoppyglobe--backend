@@ -2,11 +2,11 @@
 //it contains the database connection logic.
 import dotenv from 'dotenv'
 import app from './src/app.js';
-import dbconnet from './src/config/databaseConnection.js'
+import dbConnet from './src/config/databaseConnection.js'
 
 dotenv.config(); //to configure the data in .env file to whole of the server or app.
 
-await dbconnet() //established the mongodb connection 
+await dbConnet() //established the mongodb connection 
 
 const PORT = 8080
 

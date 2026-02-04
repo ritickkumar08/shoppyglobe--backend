@@ -1,5 +1,5 @@
 import User from "../Models/user.model.js";
-
+import bcrypt from "bcryptjs";
 
 // Controller responsible for user registration, Creates a new user after validating input and hashing password
 const registerController = async (req, res) => {
@@ -36,7 +36,7 @@ const registerController = async (req, res) => {
         }
 
         //check if the user already exists then they can't register.
-        const existingUser = User.findOne({email})
+        const existingUser = await User.findOne({email})
 
         //if user exists return immediately.
         if(existingUser){
