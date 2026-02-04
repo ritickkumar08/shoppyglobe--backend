@@ -1,4 +1,4 @@
-import User from "../Models/user.model";
+import User from "../Models/user.model.js";
 
 
 // Controller responsible for user registration, Creates a new user after validating input and hashing password
